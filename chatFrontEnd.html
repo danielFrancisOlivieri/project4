@@ -38,7 +38,7 @@ function getCommentList () {
  getCommentListBusy = true;
  var commentClass = "comment";
    var message = "***$request$END"; 
-  console.log("test 1");
+ // console.log("test 1");
     XMLHttp.open("POST", "/cgi-bin/olivierid_JAD_chatAjax.cgi?"
 						 + "message=" + message
 		 ,true);
@@ -64,7 +64,7 @@ function getCommentList () {
 	
 	if ((toPreventRepitition != fromCGI) && ("$END" != fromCGI))
 	{
-	var toAppend = toAppend + fromCGI;
+	var toAppend = fromCGI; //toAppend + fromCGI;
 
 	$("#chatbox").append(toAppend);   //(" <div class = " + commentClass + " > <b>" + fromCGI + "</b> </div>");
 	
