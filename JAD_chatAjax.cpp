@@ -79,6 +79,7 @@ int main() {
 	//return 0;	
 	outMessage = recfifo.recv(); // puts the results from the server into the results variable 
 	  outMessage = StringToUpper(outMessage);
+	 // cout << outMessage << endl;
 	 // this if statement looks for the $END in order to break the loop once all the lines have been outputted 
 	 if (outMessage.find("$END") != string:: npos)
 	 {
