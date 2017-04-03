@@ -56,13 +56,12 @@ int main() {
   
   // Call server to get results
   inMessage = **message;
- // cout << "This is the message: " << inMessage << endl;
   inMessage = StringToUpper(inMessage);
+	//The inputted message is put in the uppercase
   
   string color = "#f44336";
   
-//cout << "<p> <font color = " + color + ">" << inMessage << " </font> </p>" << endl;
-//return 0;
+
 
   while(1)
 	
@@ -87,30 +86,11 @@ int main() {
 		 break;
 	 }
 
-	 // this makes the word in question bolded
-	//outMessage = boldWord(outMessage, ourWord);
 
-	 
-	// outMessage = boldWord(std:: outMessage);
-// this outputs the lines and puts them in paragraph format 
 
 	cout <<  outMessage;
+	  //print the message
 		return 0;
 	}
-  
-  
-  // //string message =  type+stname;
-  // sendfifo.openwrite();
-  // sendfifo.send(inMessage);
-  
-  // /* Get a message from a server */
-  // recfifo.openread();
-  // string results = recfifo.recv();
-  // recfifo.fifoclose();
-  // sendfifo.fifoclose();
-  // //cout << "Content-Type: text/plain\n\n";
 
-  // cout << results;
-  
-//return 0;
 }
