@@ -69,32 +69,46 @@ string commentClass = "comment";
 		if (inMessage.find("***$") > 10)
 			
 			{
-				cout << "pushback" << endl;
-				
+				cout << "pushback" << endl;				
 				outMessage =  " <div class = " + commentClass + " > <b>" + inMessage + "</b> </div> ";
 				commentVector.push_back(outMessage);
 			}
+			
 			string toSendOut = "";
+			cout << "before" << endl;
+			
+			sendfifo.send(outMessage);
+			
+			/*
 			for (int i = 0; i < commentVector.size(); i++)
 			{
-				toSendOut += commentVector[i];
+				
+				//toSendOut += commentVector[i];
+				outMessage = commentVector[i];
+				sendfifo.send(outMessage);
+				//sendfifo.send("$END");
+				
+				cout << "SENDING: " << outMessage << " i: " << i <<  endl;
 			}
+			*/
+			sendfifo.send("$END");
+			cout << "END HAVING BEEN SENT" << endl;
 		
 		//" <div class = " + commentClass + " > <b>" + fromCGI + "</b> </div>"
 		
-		if (outMessage.size() > 0)
-		{
-			cout << "SENDING: " << toSendOut <<  endl;
-			// int i = 0;
-			// while (i < commentVector.size())
-			// {
-				//cout << "SENDING: " << commentVector[i] <<  endl;
-				//sendfifo.send("<div> <b> SPUCKLE </b> </div>");
-				sendfifo.send(toSendOut);
-				// i++;
-			// }
+		// if (outMessage.size() > 0)
+		// {
+			// cout << "SENDING: " << toSendOut <<  endl;
+			// // int i = 0;
+			// // while (i < commentVector.size())
+			// // {
+				// //cout << "SENDING: " << commentVector[i] <<  endl;
+				// //sendfifo.send("<div> <b> SPUCKLE </b> </div>");
 				
-		}
+				// // i++;
+			// // }
+				
+		// }
 				
 
 /*
