@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="name_stats_ajax.css">
 <script>
 
-     var XMLHttp, getCommentListBusy = false;
+     var XMLHttp, getCommentListBusy = false, toPreventRepitition = "";
 
 
 	 function init() {
@@ -39,7 +39,7 @@ function getCommentList () {
  var commentClass = "comment";
    var message = "***$request$END"; 
   console.log("test 1");
-    XMLHttp.open("GET", "/cgi-bin/olivierid_JAD_chatAjax.cgi?"
+    XMLHttp.open("POST", "/cgi-bin/olivierid_JAD_chatAjax.cgi?"
 						 + "message=" + message
 		 ,true);
 		 
@@ -60,12 +60,21 @@ function getCommentList () {
 	fromCGI = fromCGI.replace("fuck", "f***");
 	fromCGI = fromCGI.replace("Juvi", "the programmer formerly know as Juvi");
 	fromCGI = fromCGI.replace("Aidan", "Alexander Hamilton");
-	$('.comment').remove();
-	$("#chatbox").append(fromCGI);   //(" <div class = " + commentClass + " > <b>" + fromCGI + "</b> </div>");
+	//$('.comment').remove();
 	
+	if ((toPreventRepitition != fromCGI) && ("$END" != fromCGI))
+	{
+	var toAppend = toAppend + fromCGI;
+
+	$("#chatbox").append(toAppend);   //(" <div class = " + commentClass + " > <b>" + fromCGI + "</b> </div>");
+	
+	
+	toPreventRepitition = fromCGI;
+	}
 	
 	
 
+	
 	getCommentListBusy = false;
 	}
     }
@@ -281,13 +290,6 @@ input[type=text], select, #submitName {
 </center>
 <br>
    </div>
-<center>
-   <p>
-  <input class = "myButton" type="button" onclick="javascript: getCommentList ()" name="Results" value="Show Processes" />
-  <input class = "myButton" type="button" onclick="javascript: AutoRefresh ()" name="AutoRefresh" value="Auto Update" />
-  <input class = "myButton" type="button" onclick="javascript: StopRefresh ()" name="Stop" value="Stop Update" />
-</p>
-</center>
 <br>
 <br>
 
