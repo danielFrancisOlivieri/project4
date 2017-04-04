@@ -1,0 +1,105 @@
+#response_div {
+    border-color: black;
+    border: dashed;
+}
+div {
+    width: 530px;
+    margin: auto;
+}
+#chatbox {
+    padding: 10px;
+    background: #fff;
+    height: 500px;
+    width: 500px;
+    border: 1px solid #ACD8F0;
+    overflow: auto;
+    margin: 0 auto;
+    font: Arial;
+}
+#topPart {
+    background-color: #f44336;
+    width: 100%;
+    height 100 vh;
+}
+.welcome
+{
+	visibility: hidden;
+}
+.myButton {
+    background-color: #f44336;
+    -moz-border-radius: 28px;
+    -webkit-border-radius: 28px;
+    border-radius: 28px;
+    border: 1px solid #ff8fff;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 18px;
+    padding: 16px 30px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #66283c;
+}
+.myButton:hover {
+    background-color: #3284d6;
+}
+.myButton:active {
+    position: relative;
+    top: 1px;
+}
+input[type=text],
+select,
+#submitName {
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: Arial;
+    border: 2px dotted #ACD8F0;
+}
+
+h1
+{
+font-size: 50px;
+color: #ACD8F0;
+text-shadow: 2px 2px black;
+}
+
+h2
+{
+font-size: 30px;
+}
+
+h3
+{
+font-size: 30px;
+}
+
+h4
+{
+font-size: 13px;
+}
+
+#menu 
+{
+
+margin: 0 auto;
+height: 50px;
+width: 100%;
+background-color: #ACD8F0;
+
+}
+button
+{
+float: right;
+margin: .5cm;
+
+}
+.welcome { float:left;
+margin:.5cm;
+
+ }
+.msgln { margin:0 0 2px 0; }
+  
