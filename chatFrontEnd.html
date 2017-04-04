@@ -1,4 +1,5 @@
 
+
 <HTML>
 <HEAD>
 <TITLE>SoftDilemma Chatroom</TITLE>
@@ -10,235 +11,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <!-- $Id: name_stats_ajax.html,v 1.6 skon Exp $ -->
 <link rel="stylesheet" type="text/css" href="name_stats_ajax.css">
-<script>
-
-     var XMLHttp, getCommentListBusy = false, toPreventRepitition = "";
-
-
-	 function init() {
-    if(navigator.appName == "Microsoft Internet Explorer") {
-	XMLHttp = new ActiveXObject("Microsoft.XMLHTTP");
-    } else {
-	XMLHttp = new XMLHttpRequest();
-    }
-}
-
-$("#usermsg").keypress(function(e) {
-    if(e.which == 13) {
-       alert("What kills you in this life will be your mother in the next.");
-    }
-});
-
-
-function getCommentList () {
-
- if (!getCommentListBusy)
- {
-
- getCommentListBusy = true;
- var commentClass = "comment";
-   var message = "***$request$END"; 
- // console.log("test 1");
-    XMLHttp.open("POST", "/cgi-bin/olivierid_JAD_chatAjax.cgi?"
-						 + "message=" + message
-		 ,true);
-		 
-		 /*
-		 the next step is to go through this very carefully and try to make it as simple and functional as the other one
-		 The issue is in the XMLHttp
-		  
-		 */
-    XMLHttp.onreadystatechange=function() {
-	if (XMLHttp.readyState == 4) {
-	
-		       var fromCGI = XMLHttp.responseText;
-			   console.log("From CGI: " + fromCGI); 
-			   
-
-	fromCGI = fromCGI.replace("$END", "");
-	fromCGI = fromCGI.replace("Daniel", "my hero Daniel");
-	fromCGI = fromCGI.replace("fuck", "f***");
-	fromCGI = fromCGI.replace("Juvi", "the programmer formerly know as Juvi");
-	fromCGI = fromCGI.replace("Aidan", "Alexander Hamilton");
-	//$('.comment').remove();
-	
-	if ((toPreventRepitition != fromCGI) && ("$END" != fromCGI))
-	{
-	var toAppend = fromCGI; //toAppend + fromCGI;
-
-	$("#chatbox").append(toAppend);   //(" <div class = " + commentClass + " > <b>" + fromCGI + "</b> </div>");
-	
-	
-	toPreventRepitition = fromCGI;
-	}
-	
-	
-
-	
-	getCommentListBusy = false;
-	}
-    }
-    XMLHttp.send(null);
-	
- }
-  
-}
-
-var intVar;
-function AutoRefresh() {
-console.log("autorefresh");
-
-    intVar = setInterval(function(){ getCommentList()}, 100);
-}
-
-function StopRefresh() {
-    clearInterval(intVar);
-}
-
-
-
-
-     function getUsername()
-     {
-
-     var name= document.getElementById('userName').value;
-     document.getElementById('user').innerHTML = name;
-commentObject.username = name;
-      }
-
-
-
-// comment object
-var commentObject = {
-username : "Hamlet",
-text: "",
-color: "black",
-returnOutputString: function() {
- return "$USERNAME*" + this.username + "Cato$COLOR*" + this.color + "$PICTURE*three$TEXT*" + this.text + "$END";
-}
-
-}
-
-var XMLHttp, avoidReplication = "";
-if(navigator.appName == "Microsoft Internet Explorer") {
-    XMLHttp = new ActiveXObject("Microsoft.XMLHTTP");
-} else {
-    XMLHttp = new XMLHttpRequest();
-}
-
-
-function sendComment () {
-
- var message = document.getElementById('usermsg').value;
-
-
-if (message.length > 1)
-{
-console.log("inMessage is: " + message);
-  // if (name.length < 1) return;
-
-  commentObject.text = message;
-  message = commentObject.username + ": " + message + "$END";
-  //inMessage = commentObject.returnOutputString();
-
-    XMLHttp.open("GET", "/cgi-bin/olivierid_JAD_chatAjax.cgi?"
-						 + "message=" + message
-						 ,true);
-						
-
-	XMLHttp.send(null);
-
-}
-  
-
-    
-		       
-
-		       }
-			   
-$( document ).ready(function() {
-    AutoRefresh();
-});
-
-</script>
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+<script src = "chat3.js"></script>
 </head>
 
 
-<style>
-
-#response_div
-{
-border-color: black;
-border: dashed;
-}
-
-
-div
-{
-    width: 400px;
-    margin: auto;
-
-
-}
-
-    #chatbox
-{
-  padding: 10px;
-  background: #fff;
-  height: 260px;
-  width: 430px;
-  border: 1px solid #ACD8F0;
-  overflow:auto;
-  margin: 0 auto;
-
-}
-
-#topPart
-{
-  background-color: #f44336;
-  width: 100%;
-  height 100 vh;
-}
-
-.myButton {
-	background-color:#f44336;
-	-moz-border-radius:28px;
-	-webkit-border-radius:28px;
-	border-radius:28px;
-	border:1px solid #ff8fff;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:18px;
-	padding:16px 30px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #66283c;
-}
-.myButton:hover {
-	background-color:#3284d6;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
-}
-
-input[type=text], select, #submitName {
-
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-
-</style>
-
 <body>
 <!-- <h1> <center>SoftDilemma Chatroom </center> </h1> -->
-
 
   <div id = "topPart" class = "jumbotron">
 
@@ -271,7 +50,8 @@ input[type=text], select, #submitName {
 <div id= "wrapper" >
    <div id= "menu">
    <p class= "welcome"> Welcome, <b> <span id="user" ></span></b></p>
-   <p class= "logout"><a id= "exit" href= "#">Exit Chat</a></p>
+  <!-- <p class= "logout"><a id= "exit" href= "#">Exit Chat</a></p> -->
+  
    <div style= "clear:both" ></div>
 
 </div>
@@ -287,6 +67,9 @@ input[type=text], select, #submitName {
    <p>
 <input class = "myButton" type="button" onclick="javascript: sendComment ()" name="submit" value="Submit" />
 </p>
+<br>
+<br>
+ <input class = "myButton" id = "exit" type="button"  name="exit" value="Exit Chat" />
 </center>
 <br>
    </div>
@@ -296,3 +79,4 @@ input[type=text], select, #submitName {
 
           </body>
 </HTML>
+
