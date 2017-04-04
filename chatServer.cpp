@@ -1,3 +1,4 @@
+
 /***************************************************************************
 * copyright : (C) 2009 by Jim Skon
 ***************************************************************************/
@@ -26,58 +27,52 @@ using namespace std;
 
 
   /* Fifo names */
-string receive_fifo = "Namerequest";
-string send_fifo = "Namereply";
+string receive_fifo = "Chatrequest";
+string send_fifo = "Chatreply";
 int count = 0;
 /* Server main line,create name MAP, wait for and serve requests */
 int main() {
 
-string inMessage, outMessage = "", preventDuplicates;
-
-vector <string> commentVector;
+string inMessage, outMessage = ""; // global variables that are needed 
 
   // create the FIFOs for communication
   Fifo recfifo(receive_fifo);
   Fifo sendfifo(send_fifo);
   
-
-  int fourFromEnd;
- 
   // main while loop 
    while (1) {
 inMessage = "";
 
 string commentClass = "comment";
 
-
    recfifo.openread();// opens to read
 	     inMessage = recfifo.recv(); // takes message in 
 		 	sendfifo.openwrite(); // opens the write fifo 
-		cout << inMessage << "   " << inMessage.size() << endl;
-		int toSubstring = inMessage.size() - 4;
+		
+		// cuts of the trailing $END 
+		int toSubstring = inMessage.size() - 4; 
 		inMessage = inMessage.substr(0, toSubstring);
 	
 		
-		if (inMessage.find("***$") > 10)
+		if (inMessage.find("***$") > 10) // determines whether or not it's a request 
 			
 			{
-				cout << "pushback" << endl;				
-				outMessage =  " <div class = " + commentClass + " > <b>" + inMessage + "</b> </div> <br>";
-				commentVector.push_back(outMessage);
-			}
-			
-			string toSendOut = "";
-			cout << "before" << endl;
-			
-			sendfifo.send(outMessage);
-			
-			sendfifo.send("$END");
-			cout << "END HAVING BEEN SENT" << endl;
-		
+				// allows the message to be ready to immediatly be put into the HTML 
+				outMessage =  " <div class = " + commentClass + " > <b>" + inMessage + "</b> </div> <br>"; 
 
+			}
+					
+			
+			sendfifo.send(outMessage); // sends the outMessage to the cgi 
+			
+			sendfifo.send("$END");// send the End message 
+			
+		
+// closes fifos 
 	sendfifo.fifoclose();
 	 recfifo.fifoclose();
   }
   
   
 }
+
