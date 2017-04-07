@@ -37,8 +37,8 @@ std::string StringToUpper(std::string myString)//A program to turn a string into
 
 
 // fifo for communication
-string receive_fifo = "Namereply";
-string send_fifo = "Namerequest";
+string receive_fifo = "Chatreply";
+string send_fifo = "Chatrequest";
 
 int main() {
   Cgicc cgi;    // Ajax object
