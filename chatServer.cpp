@@ -1,4 +1,3 @@
-
 /***************************************************************************
 * copyright : (C) 2009 by Jim Skon
 ***************************************************************************/
@@ -44,35 +43,56 @@ string inMessage, outMessage = ""; // global variables that are needed
 inMessage = "";
 
 string commentClass = "comment";
-
+cout << "testing 1" << endl;
    recfifo.openread();// opens to read
+   cout << "testing 1.1" << endl;
 	     inMessage = recfifo.recv(); // takes message in 
+		 cout << "testing 1.2" << endl;
 		 	sendfifo.openwrite(); // opens the write fifo 
+			cout << "testing 1.3" << endl;
 		
 		// cuts of the trailing $END 
 		int toSubstring = inMessage.size() - 4; 
 		inMessage = inMessage.substr(0, toSubstring);
-	
+	cout << "testing 2 inMessage: " << inMessage << endl;
 		
 		if (inMessage.find("***$") > 10) // determines whether or not it's a request 
 			
-			{
+			{ // if it's not a request 
+				
 				// allows the message to be ready to immediatly be put into the HTML 
 				outMessage =  " <div class = " + commentClass + " > <b>" + inMessage + "</b> </div> <br>"; 
-
-			}
-					
-			
-			sendfifo.send(outMessage); // sends the outMessage to the cgi 
+				cout << "testing outMessage: " << outMessage << endl;
+					sendfifo.send(outMessage); // sends the outMessage to the cgi 
 			
 			sendfifo.send("$END");// send the End message 
+
+			}
+	else{
+								if ( outMessage.size() > 2)
+								{
+										cout << "70: " << outMessage << endl;
+				sendfifo.send(outMessage + "$END"); // sends the outMessage to the cgi 
+			cout << "72" << endl;	
 			
+								}
+								else
+								{
+								cout << "line 81: " << outMessage << endl;
+								sendfifo.send("Nothing $END");
+								cout << "line 83" << endl;
+								}
+			
+				}	
+			
+			
+		cout << "before the fifos" << endl;
 		
 // closes fifos 
 	sendfifo.fifoclose();
 	 recfifo.fifoclose();
+	 cout << "after the fifos" << endl;
   }
   
   
 }
-
